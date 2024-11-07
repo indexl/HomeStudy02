@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,8 +21,12 @@ public class UsrArticleController {
 	@GetMapping("/usr/article/doWrite")
 	@ResponseBody
 	public Article doWrite(String title, String body) {
+		
+		articleService.writeArticle(title, body);
 
-		return articleService.writeArticle(title, body);
+		int id = articleService.getLastArticleId();
+		
+		return articleService.getArticleById(id);
 	}
 
 	@GetMapping("/usr/article/showList")
@@ -55,7 +58,7 @@ public class UsrArticleController {
 			return id + "번 게시물은 없습니다";
 		}
 
-		this.articleService.modifyArticle(foundArticle, title, body);
+		this.articleService.modifyArticle(id, title, body);
 
 		return id + "번 게시물을 수정하였습니다";
 
@@ -67,11 +70,9 @@ public class UsrArticleController {
 
 		Article foundArticle = this.articleService.getArticleById(id);
 
-		if (foundArticle == null) {
-			return id + "번 게시물은 없습니다";
-		}
+	
 
-		this.articleService.deleteArticle(foundArticle);
+		this.articleService.deleteArticle(id);
 
 		return id + "번 게시물을 삭제하였습니다";
 	}
