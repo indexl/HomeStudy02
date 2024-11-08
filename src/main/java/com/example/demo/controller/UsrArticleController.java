@@ -21,11 +21,11 @@ public class UsrArticleController {
 	@GetMapping("/usr/article/doWrite")
 	@ResponseBody
 	public Article doWrite(String title, String body) {
-		
+
 		articleService.writeArticle(title, body);
 
 		int id = articleService.getLastArticleId();
-		
+
 		return articleService.getArticleById(id);
 	}
 
@@ -58,7 +58,7 @@ public class UsrArticleController {
 			return id + "번 게시물은 없습니다";
 		}
 
-		this.articleService.modifyArticle(id, title, body);
+		
 
 		return id + "번 게시물을 수정하였습니다";
 
@@ -70,7 +70,9 @@ public class UsrArticleController {
 
 		Article foundArticle = this.articleService.getArticleById(id);
 
-	
+		if (foundArticle == null) {
+			return id + "번 게시물은 없습니다";
+		}
 
 		this.articleService.deleteArticle(id);
 

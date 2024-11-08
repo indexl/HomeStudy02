@@ -18,24 +18,24 @@ public interface ArticleDao {
 				SET regDate = NOW()
 					,updateDate = NOW()
 					,title = #{title}
-					,`body` = #{body}		 
+					,`body` = #{body}
 			""")
 	public void writeArticle(String title, String body);
 
 	@Select("""
-			SELECT * 
-				FROM article 
+			SELECT *
+				FROM article
 				ORDER BY id DESC
 			""")
 	public List<Article> getArticles();
-	
+
 	@Select("""
 			SELECT *
 				FROM article
 				WHERE id = #{id}
 			""")
 	public Article getArticleById(int id);
-	
+
 	@Update("""
 			<script>
 			UPDATE article
@@ -43,21 +43,21 @@ public interface ArticleDao {
 					<if test = "title != null and title !='' ">
 						,title = #{title}
 					</if>
-					
+
 					<if test = "body != null and body !='' ">
 						,body = #{body}
-					</if>				
+					</if>
 				WHERE id = #{id}
 			</script>
 			""")
 	public void modifyArticle(int id, String title, String body);
-	
+
 	@Delete("""
 			DELETE FROM article
 				WHERE id = #{id}
 			""")
 	public void deleteArticle(int id);
 
-	@Select("SELECT LAST_INSERT_ID()") 
+	@Select("SELECT LAST_INSERT_ID()")
 	public int getLastArticleId();
 }

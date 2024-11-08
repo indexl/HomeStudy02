@@ -37,7 +37,7 @@ public class ArticleService {
 	}
 
 	public int getLastArticleId() {
-		
+
 		return this.articleDao.getLastArticleId();
 	}
 }
