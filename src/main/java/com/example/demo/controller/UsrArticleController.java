@@ -57,8 +57,8 @@ public class UsrArticleController {
 		if (foundArticle == null) {
 			return id + "번 게시물은 없습니다";
 		}
-
 		
+		this.articleService.modifyArticle(id, title, body);	
 
 		return id + "번 게시물을 수정하였습니다";
 

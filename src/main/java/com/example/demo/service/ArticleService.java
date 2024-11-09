@@ -36,8 +36,5 @@ public class ArticleService {
 		return this.articleDao.getArticles();
 	}
 
-	public int getLastArticleId() {
-
-		return this.articleDao.getLastArticleId();
-	}
+	
 }
