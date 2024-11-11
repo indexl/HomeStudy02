@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data  //getter setter 를 대신해준다!
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Article {

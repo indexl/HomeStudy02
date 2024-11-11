@@ -43,8 +43,8 @@ public class UsrArticleController {
 
 		if (foundArticle == null) {
 			return id + "번 게시물은 없습니다";
-		}
 
+		}
 		return foundArticle;
 	}
 
@@ -57,11 +57,10 @@ public class UsrArticleController {
 		if (foundArticle == null) {
 			return id + "번 게시물은 없습니다";
 		}
-		
-		this.articleService.modifyArticle(id, title, body);	
+
+		this.articleService.modifyArticle(id, title, body);
 
 		return id + "번 게시물을 수정하였습니다";
-
 	}
 
 	@GetMapping("/usr/article/doDelete")
@@ -76,6 +75,6 @@ public class UsrArticleController {
 
 		this.articleService.deleteArticle(id);
 
-		return id + "번 게시물을 삭제하였습니다";
+		return id + "번 게시물을 삭제하였습니다.";
 	}
 }

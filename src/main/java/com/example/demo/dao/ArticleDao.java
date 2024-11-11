@@ -16,18 +16,11 @@ public interface ArticleDao {
 	@Insert("""
 			INSERT INTO article
 				SET regDate = NOW()
-					,updateDate = NOW()
-					,title = #{title}
-					,`body` = #{body}
+				, updateDate = NOW()
+				, title = #{title}
+				,`body` = #{body}
 			""")
 	public void writeArticle(String title, String body);
-
-	@Select("""
-			SELECT *
-				FROM article
-				ORDER BY id DESC
-			""")
-	public List<Article> getArticles();
 
 	@Select("""
 			SELECT *
@@ -36,16 +29,23 @@ public interface ArticleDao {
 			""")
 	public Article getArticleById(int id);
 
+	@Select("""
+			SELECT *
+				FROM article
+				ORDER BY id DESC
+			""")
+	public List<Article> getArticles();
+
 	@Update("""
 			<script>
 			UPDATE article
 				SET updateDate = NOW()
 					<if test = "title != null and title !='' ">
-						,title = #{title}
+					, title = #{title}
 					</if>
 
 					<if test = "body != null and body !='' ">
-						,body = #{body}
+					, body = #{body}
 					</if>
 				WHERE id = #{id}
 			</script>
@@ -59,5 +59,6 @@ public interface ArticleDao {
 	public void deleteArticle(int id);
 
 	@Select("SELECT LAST_INSERT_ID()")
-	public int getLastArticleId();
+	public int getLastArticlId();
+
 }
