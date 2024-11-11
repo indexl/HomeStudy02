@@ -27,23 +27,23 @@ public class UsrArticleController {
 		int id = articleService.getLastArticleId();
 
 		return articleService.getArticleById(id);
+
 	}
 
 	@GetMapping("/usr/article/showList")
 	@ResponseBody
 	public List<Article> showList() {
-		return this.articleService.getArticles();
+		return articleService.getArticles();
 	}
 
 	@GetMapping("/usr/article/showDetail")
 	@ResponseBody
 	public Object showDetail(int id) {
 
-		Article foundArticle = this.articleService.getArticleById(id);
+		Article foundArticle = articleService.getArticleById(id);
 
 		if (foundArticle == null) {
-			return id + "번 게시물은 없습니다";
-
+			return id + "번 글은 존재하지 않습니다";
 		}
 		return foundArticle;
 	}
@@ -52,29 +52,27 @@ public class UsrArticleController {
 	@ResponseBody
 	public String doModify(int id, String title, String body) {
 
-		Article foundArticle = this.articleService.getArticleById(id);
+		Article foundArticle = articleService.getArticleById(id);
 
 		if (foundArticle == null) {
-			return id + "번 게시물은 없습니다";
+			return id + "번 글은 존재하지 않습니다";
 		}
-
 		this.articleService.modifyArticle(id, title, body);
 
-		return id + "번 게시물을 수정하였습니다";
+		return id + "번 글을 수정하였습니다.";
 	}
 
 	@GetMapping("/usr/article/doDelete")
 	@ResponseBody
 	public String doDelete(int id) {
 
-		Article foundArticle = this.articleService.getArticleById(id);
+		Article foundArticle = articleService.getArticleById(id);
 
 		if (foundArticle == null) {
-			return id + "번 게시물은 없습니다";
+			return id + "번 글은 존재하지 않습니다";
 		}
-
 		this.articleService.deleteArticle(id);
 
-		return id + "번 게시물을 삭제하였습니다.";
+		return id + "번 글을 삭제하였습니다.";
 	}
 }
